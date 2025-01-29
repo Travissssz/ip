@@ -24,10 +24,7 @@ public class Pooh {
             }
 
             if (line.equalsIgnoreCase("list")) {
-                lineBetweenText();
-                //print list here
                 printList();
-                lineBetweenText();
                 continue;
             }
 
@@ -36,19 +33,26 @@ public class Pooh {
             addToList(line);
             lineBetweenText();// Print user input
         }
-    }
+    } //continues echoing
+
 
     public static void addToList(String item){
         listOfItems = Arrays.copyOf(listOfItems, listOfItems.length + 1);
         listOfItems[listOfItems.length - 1] = item;
-    }
+    } // add user input to list \
 
     public static void printList(){
-        for(int i = 0; i < listOfItems.length; i++){
-
-            System.out.println(i+1 + ". " + listOfItems[i]);
+        lineBetweenText();
+        if(listOfItems.length == 0){
+            System.out.println("List is empty");
         }
-    }
+        else {
+            for (int i = 0; i < listOfItems.length; i++) {
+                System.out.println(i + 1 + ". " + listOfItems[i]);
+            }
+        }
+        lineBetweenText();
+    } //prints list
 
 
     public static void main(String[] args) {
