@@ -28,6 +28,16 @@ public class Pooh {
                 continue;
             }
 
+            if(line.startsWith("mark ")){
+                markTask(line, true);
+                continue;
+            }
+
+            if(line.startsWith("unmark ")){
+                markTask(line, false);
+                continue;
+            }
+
             lineBetweenText();
             System.out.println("added: " + line);
             addToList(line);
@@ -35,6 +45,25 @@ public class Pooh {
         }
     } //continues echoing
 
+    public static void markTask(String line, boolean mark) {
+        int index = Integer.parseInt(line.split(" ")[1]) - 1;
+        //input invalid index
+        if(index >= taskList.size() || index < 0) {
+            System.out.println("Invalid index");
+        }
+        else{
+            if(mark){
+                taskList.get(index).markAsDone();
+                lineBetweenText();
+                System.out.printf("Nice! I've marked this task as done:%n%s%n",  taskList.get(index));
+            }
+            else{
+                taskList.get(index).setIsDone(false);
+                lineBetweenText();
+                System.out.printf("OK, I've marked this task as not done yet:%n%s%n", taskList.get(index));
+            }
+        }
+    }
 
     public static void addToList(String item){
         taskList.add(new Task(item, false));
