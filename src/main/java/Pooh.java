@@ -1,6 +1,10 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Pooh {
+
+    //initialise a class-level array for user input
+    public static String[] listOfItems = new String[0];
 
     public static void lineBetweenText(){
         System.out.println("____________________________________________________________");
@@ -19,11 +23,33 @@ public class Pooh {
                 break;
             }
 
+            if (line.equalsIgnoreCase("list")) {
+                lineBetweenText();
+                //print list here
+                printList();
+                lineBetweenText();
+                continue;
+            }
+
             lineBetweenText();
-            System.out.println("    " + line);
+            System.out.println("added: " + line);
+            addToList(line);
             lineBetweenText();// Print user input
         }
     }
+
+    public static void addToList(String item){
+        listOfItems = Arrays.copyOf(listOfItems, listOfItems.length + 1);
+        listOfItems[listOfItems.length - 1] = item;
+    }
+
+    public static void printList(){
+        for(int i = 0; i < listOfItems.length; i++){
+
+            System.out.println(i+1 + ". " + listOfItems[i]);
+        }
+    }
+
 
     public static void main(String[] args) {
         lineBetweenText();
