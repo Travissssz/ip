@@ -3,92 +3,96 @@ import java.util.Scanner;
 
 public class Pooh {
 
-    //Creates a list of Task
+    // List of tasks
     public static ArrayList<Task> taskList = new ArrayList<>();
 
-    public static void lineBetweenText(){
+    //Prints a line to separate sections in the output.
+    public static void printLine() {
         System.out.println("____________________________________________________________");
-    } //Prints the Line between the texts
+    }
 
-    public static void Echo() {
+    //Main loop for interacting with the user.
+    public static void echo() {
         Scanner in = new Scanner(System.in);
 
-        while (true) {  // Loop runs until 'bye' is entered
-            String line = in.nextLine().trim(); // Read input and remove extra spaces
+        while (true) {
+            String line = in.nextLine().trim(); // Read and clean up input
 
             if (line.equalsIgnoreCase("bye")) {
-                lineBetweenText();
-                System.out.println(" Bye. Hope to see you again soon!");
-                lineBetweenText();
+                printLine();
+                System.out.println("Bye. Hope to see you again soon!");
+                printLine();
                 break;
             }
 
             if (line.equalsIgnoreCase("list")) {
-                printList();
+                printTaskList();
                 continue;
             }
 
-            if(line.startsWith("mark ")){
-                markTask(line, true);
+            if (line.startsWith("mark ")) {
+                markTask(line, true); // Mark the task as done
                 continue;
             }
 
-            if(line.startsWith("unmark ")){
-                markTask(line, false);
+            if (line.startsWith("unmark ")) {
+                markTask(line, false); // Mark the task as not done
                 continue;
             }
 
-            lineBetweenText();
-            System.out.println("added: " + line);
-            addToList(line);
-            lineBetweenText();// Print user input
+            printLine();
+            System.out.println("Added: " + line);
+            addToTaskList(line); // Add new task
+            printLine();
         }
-    } //continues echoing
+    }
 
+    //Marks the task as done or not done.
     public static void markTask(String line, boolean mark) {
-        int index = Integer.parseInt(line.split(" ")[1]) - 1;
-        //input invalid index
-        if(index >= taskList.size() || index < 0) {
-            System.out.println("Invalid index");
-        }
-        else{
-            if(mark){
-                taskList.get(index).markAsDone();
-                lineBetweenText();
-                System.out.printf("Nice! I've marked this task as done:%n%s%n",  taskList.get(index));
-            }
-            else{
-                taskList.get(index).setIsDone(false);
-                lineBetweenText();
+        int index = Integer.parseInt(line.split(" ")[1]) - 1; // Extract task index
+
+        // Validate task index
+        if (index >= taskList.size() || index < 0) {
+            System.out.println("Invalid index.");
+        } else {
+            if (mark) {
+                taskList.get(index).markAsDone(); // Mark task as done
+                printLine();
+                System.out.printf("Nice! I've marked this task as done:%n%s%n", taskList.get(index));
+            } else {
+                taskList.get(index).setIsDone(false); // Unmark task
+                printLine();
                 System.out.printf("OK, I've marked this task as not done yet:%n%s%n", taskList.get(index));
             }
         }
     }
 
-    public static void addToList(String item){
-        taskList.add(new Task(item, false));
-    } // add user input to list \
+    //Adds a new task to the task list.
+    public static void addToTaskList(String taskName) {
+        taskList.add(new Task(taskName, false)); // Add task to the list, mark as not done
+    }
 
-    public static void printList(){
-        lineBetweenText();
+    //Prints all tasks in the list.
+    public static void printTaskList() {
+        printLine();
         if (taskList.isEmpty()) {
-            System.out.println(" No tasks in the list yet.");
+            System.out.println("No tasks in the list yet.");
         } else {
-            System.out.println(" Here are the tasks in your list:");
+            System.out.println("Here are the tasks in your list:");
             for (int i = 0; i < taskList.size(); i++) {
-                System.out.println((i + 1) + "." + taskList.get(i));
+                System.out.println((i + 1) + ". " + taskList.get(i));
             }
         }
-        lineBetweenText();
-    } //prints list
+        printLine();
+    }
 
-
+    //Main method that starts the Pooh assistant.
     public static void main(String[] args) {
-        lineBetweenText();
-        System.out.println("Hello! I'm Pooh, your own personal assistant");
-        System.out.println("What can I do for you today sir?");
-        lineBetweenText();
+        printLine();
+        System.out.println("Hello! I'm Pooh, your personal assistant.");
+        System.out.println("What can I do for you today, sir?");
+        printLine();
 
-        Echo();
+        echo();
     }
 }
