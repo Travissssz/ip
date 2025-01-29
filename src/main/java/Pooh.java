@@ -1,10 +1,10 @@
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Pooh {
 
-    //initialise a class-level array for user input
-    public static String[] listOfItems = new String[0];
+    //Creates a list of Task
+    public static ArrayList<Task> taskList = new ArrayList<>();
 
     public static void lineBetweenText(){
         System.out.println("____________________________________________________________");
@@ -37,18 +37,17 @@ public class Pooh {
 
 
     public static void addToList(String item){
-        listOfItems = Arrays.copyOf(listOfItems, listOfItems.length + 1);
-        listOfItems[listOfItems.length - 1] = item;
+        taskList.add(new Task(item, false));
     } // add user input to list \
 
     public static void printList(){
         lineBetweenText();
-        if(listOfItems.length == 0){
-            System.out.println("List is empty");
-        }
-        else {
-            for (int i = 0; i < listOfItems.length; i++) {
-                System.out.println(i + 1 + ". " + listOfItems[i]);
+        if (taskList.isEmpty()) {
+            System.out.println(" No tasks in the list yet.");
+        } else {
+            System.out.println(" Here are the tasks in your list:");
+            for (int i = 0; i < taskList.size(); i++) {
+                System.out.println((i + 1) + "." + taskList.get(i));
             }
         }
         lineBetweenText();
