@@ -16,34 +16,31 @@ public class Pooh {
         Scanner in = new Scanner(System.in);
 
         while (true) {
-            String line = in.nextLine().trim(); // Read and clean up input
+            String line = in.nextLine().trim().toLowerCase(); // Read and clean up input
 
-            if (line.equalsIgnoreCase("bye")) {
-                printLine();
-                System.out.println("Bye. Hope to see you again soon!");
-                printLine();
-                break;
-            }
-
-            if (line.equalsIgnoreCase("list")) {
+            String[] partsOfInput = line.split(" ",2);
+            String command = partsOfInput[0];
+            switch (command) {
+                case "bye":
+                    printLine();
+                    System.out.println("Bye. Hope to see you again soon!");
+                    printLine();
+                    return;
+            case "list":
                 printTaskList();
-                continue;
+                break;
+            case "mark":
+                markTask(line, true);
+                break;
+            case "unmark":
+                markTask(line, false);
+                break;
+            default:
+                printLine();
+                System.out.println("Added: " + line);
+                addToTaskList(line); // Add new task
+                printLine();
             }
-
-            if (line.startsWith("mark ")) {
-                markTask(line, true); // Mark the task as done
-                continue;
-            }
-
-            if (line.startsWith("unmark ")) {
-                markTask(line, false); // Mark the task as not done
-                continue;
-            }
-
-            printLine();
-            System.out.println("Added: " + line);
-            addToTaskList(line); // Add new task
-            printLine();
         }
     }
 
