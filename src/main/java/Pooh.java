@@ -22,10 +22,8 @@ public class Pooh {
             String command = partsOfInput[0];
             switch (command) {
                 case "bye":
-                    printLine();
-                    System.out.println("Bye. Hope to see you again soon!");
-                    printLine();
-                    return;
+                printBye();
+                return;
             case "list":
                 printTaskList();
                 break;
@@ -42,6 +40,12 @@ public class Pooh {
                 printLine();
             }
         }
+    }
+    
+    public static void printBye(){
+        printLine();
+        System.out.println("Bye. Hope to see you again soon!");
+        printLine();
     }
 
     //Marks the task as done or not done.
