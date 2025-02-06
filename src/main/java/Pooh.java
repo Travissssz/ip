@@ -12,7 +12,7 @@ public class Pooh {
     }
 
     //Main loop for interacting with the user.
-    public static void echo() {
+    public static void interactWithUser() {
         Scanner in = new Scanner(System.in);
 
         while (true) {
@@ -22,7 +22,7 @@ public class Pooh {
             String command = partsOfInput[0];
             switch (command) {
                 case "bye":
-                printBye();
+                printByeMessage();
                 return;
             case "list":
                 printTaskList();
@@ -41,8 +41,8 @@ public class Pooh {
             }
         }
     }
-    
-    public static void printBye(){
+
+    public static void printByeMessage(){
         printLine();
         System.out.println("Bye. Hope to see you again soon!");
         printLine();
@@ -87,13 +87,17 @@ public class Pooh {
         printLine();
     }
 
-    //Main method that starts the Pooh assistant.
-    public static void main(String[] args) {
+    //Prints welcome message
+    public static void printWelcomeMessage(){
         printLine();
         System.out.println("Hello! I'm Pooh, your personal assistant.");
         System.out.println("What can I do for you today, sir?");
         printLine();
+    }
 
-        echo();
+    //Main method that starts the Pooh assistant.
+    public static void main(String[] args) {
+        printWelcomeMessage();
+        interactWithUser();
     }
 }
