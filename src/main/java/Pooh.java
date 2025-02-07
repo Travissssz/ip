@@ -1,4 +1,3 @@
-import java.security.spec.RSAOtherPrimeInfo;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -36,10 +35,23 @@ public class Pooh {
                 markTask(line, false);
                 break;
             case "todo":
-                String arguments = partsOfInput[1];
-                markToDoTask(arguments);
-                printToDoTaskMessage(arguments, taskCounter);
+                if(partsOfInput.length < 2) {
+                    System.out.println("You need to enter a task");
+                    break;
+                }
+                ToDo newToDo = new ToDo(partsOfInput[1]);
+                markToDoTask(newToDo);
+                printToDoTaskMessage(newToDo);
                 break;
+            case "deadline":
+                if(!partsOfInput[1].contains(" /by ")) {
+                    System.out.println("No task no date found!");
+                    break;
+                }
+                String[] partsOfDeadline = partsOfInput[1].split(" /by ", 2);
+                Deadline newDeadline = new Deadline(partsOfDeadline[0], partsOfDeadline[1]);
+                markDeadline(newDeadline);
+                printDeadLineMessage(newDeadline);
             default:
                 printLine();
                 System.out.println("Added: " + line);
@@ -49,16 +61,26 @@ public class Pooh {
         }
     }
 
-    public static void printToDoTaskMessage(String argument, int n){
+    public static void printDeadLineMessage(Task task) {
         System.out.println("Got it. I've added this task:");
-        System.lineSeparator();
-        System.out.println("[T] [ ] " + argument);
-        System.lineSeparator();
-        System.out.println("Now you have " + n + " tasks in the list");
+        System.out.println(task);
+        System.out.println("Now you have " + taskList.size() + " tasks in the list");
     }
 
-    public static void markToDoTask(String argument){
-        addToTaskList(argument);
+    public static void markDeadline(Deadline deadline) {
+        taskList.add(deadline);
+        taskCounter++;
+    }
+
+    public static void printToDoTaskMessage(Task task){
+        System.out.println("Got it. I've added this task:");
+        System.out.println(task);
+        System.out.println("Now you have " + taskList.size() + " tasks in the list");
+    }
+
+    public static void markToDoTask(Task task){
+        taskList.add(task);
+        taskCounter++;
     }
 
     public static void printByeMessage(){
