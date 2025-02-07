@@ -1,3 +1,4 @@
+import java.security.spec.RSAOtherPrimeInfo;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -5,6 +6,7 @@ public class Pooh {
 
     // List of tasks
     public static ArrayList<Task> taskList = new ArrayList<>();
+    public static int taskCounter = 0;
 
     //Prints a line to separate sections in the output.
     public static void printLine() {
@@ -33,6 +35,11 @@ public class Pooh {
             case "unmark":
                 markTask(line, false);
                 break;
+            case "todo":
+                String arguments = partsOfInput[1];
+                markToDoTask(arguments);
+                printToDoTaskMessage(arguments, taskCounter);
+                break;
             default:
                 printLine();
                 System.out.println("Added: " + line);
@@ -40,6 +47,18 @@ public class Pooh {
                 printLine();
             }
         }
+    }
+
+    public static void printToDoTaskMessage(String argument, int n){
+        System.out.println("Got it. I've added this task:");
+        System.lineSeparator();
+        System.out.println("[T] [ ] " + argument);
+        System.lineSeparator();
+        System.out.println("Now you have " + n + " tasks in the list");
+    }
+
+    public static void markToDoTask(String argument){
+        addToTaskList(argument);
     }
 
     public static void printByeMessage(){
@@ -70,7 +89,8 @@ public class Pooh {
 
     //Adds a new task to the task list.
     public static void addToTaskList(String taskName) {
-        taskList.add(new Task(taskName, false)); // Add task to the list, mark as not done
+        taskList.add(new ToDo(taskName)); // Add task to the list, mark as not done
+        taskCounter++;
     }
 
     //Prints all tasks in the list.
