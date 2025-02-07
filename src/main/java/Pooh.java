@@ -52,6 +52,17 @@ public class Pooh {
                 Deadline newDeadline = new Deadline(partsOfDeadline[0], partsOfDeadline[1]);
                 markDeadline(newDeadline);
                 printDeadLineMessage(newDeadline);
+                break;
+            case "event":
+                if(!partsOfInput[1].contains(" /from ") || !partsOfInput[1].contains(" /to ")){
+                    System.out.println("No task or no date found!");
+                    break;
+                }
+                String[] partsOfEvent = partsOfInput[1].split(" /from | /to ", 3);
+                Event newEvent = new Event(partsOfEvent[0], partsOfEvent[1], partsOfEvent[2]);
+                markEvent(newEvent);
+                printEventMessage(newEvent);
+                break;
             default:
                 printLine();
                 System.out.println("Added: " + line);
@@ -60,6 +71,17 @@ public class Pooh {
             }
         }
     }
+    public static void printEventMessage(Task task) {
+        System.out.println("Got it. I've added this task:");
+        System.out.println(task);
+        System.out.println("Now you have " + taskList.size() + " tasks in the list");
+    }
+
+    public static void markEvent(Event event) {
+        taskList.add(event);
+        taskCounter++;
+    }
+
 
     public static void printDeadLineMessage(Task task) {
         System.out.println("Got it. I've added this task:");
