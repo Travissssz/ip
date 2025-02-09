@@ -1,0 +1,8 @@
+todo eat cake
+deadline buy cake /by 3pm
+Event bday party /from 6pm /to 10pm
+list
+mark 1
+mark 2
+unmark 2
+bye
