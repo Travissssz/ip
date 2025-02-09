@@ -36,7 +36,7 @@ public class Pooh {
                 break;
             case "todo":
                 if(partsOfInput.length < 2) {
-                    System.out.println("You need to enter a task");
+                    System.out.println("Please enter a task");
                     break;
                 }
                 ToDo newToDo = new ToDo(partsOfInput[1]);
@@ -45,7 +45,7 @@ public class Pooh {
                 break;
             case "deadline":
                 if(!partsOfInput[1].contains(" /by ")) {
-                    System.out.println("No task no date found!");
+                    System.out.println("Please enter in the proper format. For example, [deadline TASKNAME /by DATE]");
                     break;
                 }
                 String[] partsOfDeadline = partsOfInput[1].split(" /by ", 2);
@@ -55,7 +55,7 @@ public class Pooh {
                 break;
             case "event":
                 if(!partsOfInput[1].contains(" /from ") || !partsOfInput[1].contains(" /to ")){
-                    System.out.println("No task or no date found!");
+                    System.out.println("Please enter in the proper format. For example, [event TASKNAME /from DATE /to DATE]");
                     break;
                 }
                 String[] partsOfEvent = partsOfInput[1].split(" /from | /to ", 3);
@@ -65,8 +65,7 @@ public class Pooh {
                 break;
             default:
                 printLine();
-                System.out.println("Added: " + line);
-                addToTaskList(line); // Add new task
+                System.out.println("Please enter a valid command");
                 printLine();
             }
         }
