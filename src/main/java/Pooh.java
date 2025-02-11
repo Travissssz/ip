@@ -17,56 +17,60 @@ public class Pooh {
         Scanner in = new Scanner(System.in);
 
         while (true) {
-            String line = in.nextLine().trim().toLowerCase(); // Read and clean up input
+            try {
+                String line = in.nextLine().trim().toLowerCase(); // Read and clean up input
 
-            String[] partsOfInput = line.split(" ",2);
-            String command = partsOfInput[0];
-            switch (command) {
+                String[] partsOfInput = line.split(" ", 2);
+                String command = partsOfInput[0];
+                switch (command) {
                 case "bye":
-                printByeMessage();
-                return;
-            case "list":
-                printTaskList();
-                break;
-            case "mark":
-                markTask(line, true);
-                break;
-            case "unmark":
-                markTask(line, false);
-                break;
-            case "todo":
-                if(partsOfInput.length < 2) {
-                    System.out.println("Please enter a task");
+                    printByeMessage();
+                    return;
+                case "list":
+                    printTaskList();
                     break;
-                }
-                ToDo newToDo = new ToDo(partsOfInput[1]);
-                markToDoTask(newToDo);
-                printToDoTaskMessage(newToDo);
-                break;
-            case "deadline":
-                if(!partsOfInput[1].contains(" /by ")) {
-                    System.out.println("Please enter in the proper format. For example, [deadline TASKNAME /by DATE]");
+                case "mark":
+                    markTask(line, true);
                     break;
-                }
-                String[] partsOfDeadline = partsOfInput[1].split(" /by ", 2);
-                Deadline newDeadline = new Deadline(partsOfDeadline[0], partsOfDeadline[1]);
-                markDeadline(newDeadline);
-                printDeadLineMessage(newDeadline);
-                break;
-            case "event":
-                if(!partsOfInput[1].contains(" /from ") || !partsOfInput[1].contains(" /to ")){
-                    System.out.println("Please enter in the proper format. For example, [event TASKNAME /from DATE /to DATE]");
+                case "unmark":
+                    markTask(line, false);
                     break;
+                case "todo":
+                    if (partsOfInput.length < 2) {
+                        System.out.println("Please enter a task");
+                        break;
+                    }
+                    ToDo newToDo = new ToDo(partsOfInput[1]);
+                    markToDoTask(newToDo);
+                    printToDoTaskMessage(newToDo);
+                    break;
+                case "deadline":
+                    if (!partsOfInput[1].contains(" /by ")) {
+                        System.out.println("Please enter in the proper format. For example, [deadline TASKNAME /by DATE]");
+                        break;
+                    }
+                    String[] partsOfDeadline = partsOfInput[1].split(" /by ", 2);
+                    Deadline newDeadline = new Deadline(partsOfDeadline[0], partsOfDeadline[1]);
+                    markDeadline(newDeadline);
+                    printDeadLineMessage(newDeadline);
+                    break;
+                case "event":
+                    if (!partsOfInput[1].contains(" /from ") || !partsOfInput[1].contains(" /to ")) {
+                        System.out.println("Please enter in the proper format. For example, [event TASKNAME /from DATE /to DATE]");
+                        break;
+                    }
+                    String[] partsOfEvent = partsOfInput[1].split(" /from | /to ", 3);
+                    Event newEvent = new Event(partsOfEvent[0], partsOfEvent[1], partsOfEvent[2]);
+                    markEvent(newEvent);
+                    printEventMessage(newEvent);
+                    break;
+                default:
+                    printLine();
+                    System.out.println("Please enter a valid command!");
+                    printLine();
                 }
-                String[] partsOfEvent = partsOfInput[1].split(" /from | /to ", 3);
-                Event newEvent = new Event(partsOfEvent[0], partsOfEvent[1], partsOfEvent[2]);
-                markEvent(newEvent);
-                printEventMessage(newEvent);
-                break;
-            default:
-                printLine();
-                System.out.println("Please enter a valid command");
-                printLine();
+            }catch (Exception e) {
+                System.out.println("An unexpected error occurred: " + e.getMessage());
             }
         }
     }
