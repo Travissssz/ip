@@ -116,21 +116,25 @@ public class Pooh {
 
     //Marks the task as done or not done.
     public static void markTask(String line, boolean mark) {
-        int index = Integer.parseInt(line.split(" ")[1]) - 1; // Extract task index
+        try {
+            int index = Integer.parseInt(line.split(" ")[1]) - 1; // Extract task index
 
-        // Validate task index
-        if (index >= taskList.size() || index < 0) {
-            System.out.println("Invalid index.");
-        } else {
-            if (mark) {
-                taskList.get(index).markAsDone(); // Mark task as done
-                printLine();
-                System.out.printf("Nice! I've marked this task as done:%n%s%n", taskList.get(index));
+            // Validate task index
+            if (index >= taskList.size() || index < 0) {
+                System.out.println("Invalid index.");
             } else {
-                taskList.get(index).setIsDone(false); // Unmark task
-                printLine();
-                System.out.printf("OK, I've marked this task as not done yet:%n%s%n", taskList.get(index));
+                if (mark) {
+                    taskList.get(index).markAsDone(); // Mark task as done
+                    printLine();
+                    System.out.printf("Nice! I've marked this task as done:%n%s%n", taskList.get(index));
+                } else {
+                    taskList.get(index).setIsDone(false); // Unmark task
+                    printLine();
+                    System.out.printf("OK, I've marked this task as not done yet:%n%s%n", taskList.get(index));
+                }
             }
+        }catch (NumberFormatException e){
+            System.out.println("Error: Task number needs to be a numeric value!!!");
         }
     }
 
