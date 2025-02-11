@@ -19,7 +19,9 @@ public class Pooh {
         while (true) {
             try {
                 String line = in.nextLine().trim().toLowerCase(); // Read and clean up input
-
+                if(line.isEmpty()) {
+                    throw new InvalidCommandException("Please enter a command");
+                }
                 String[] partsOfInput = line.split(" ", 2);
                 String command = partsOfInput[0];
                 switch (command) {
@@ -37,8 +39,7 @@ public class Pooh {
                     break;
                 case "todo":
                     if (partsOfInput.length < 2) {
-                        System.out.println("Please enter a task");
-                        break;
+                        throw new MissingTaskDescriptionException("Please enter a task description");
                     }
                     ToDo newToDo = new ToDo(partsOfInput[1]);
                     markToDoTask(newToDo);
@@ -46,8 +47,7 @@ public class Pooh {
                     break;
                 case "deadline":
                     if (!partsOfInput[1].contains(" /by ")) {
-                        System.out.println("Please enter in the proper format. For example, [deadline TASKNAME /by DATE]");
-                        break;
+                        throw new MissingTaskDescriptionException("Please enter in the proper format. For example, [deadline TASKNAME /by DATE]");
                     }
                     String[] partsOfDeadline = partsOfInput[1].split(" /by ", 2);
                     Deadline newDeadline = new Deadline(partsOfDeadline[0], partsOfDeadline[1]);
@@ -56,8 +56,7 @@ public class Pooh {
                     break;
                 case "event":
                     if (!partsOfInput[1].contains(" /from ") || !partsOfInput[1].contains(" /to ")) {
-                        System.out.println("Please enter in the proper format. For example, [event TASKNAME /from DATE /to DATE]");
-                        break;
+                        throw new MissingTaskDescriptionException("Please enter in the proper format. For example, [event TASKNAME /from DATE /to DATE]")
                     }
                     String[] partsOfEvent = partsOfInput[1].split(" /from | /to ", 3);
                     Event newEvent = new Event(partsOfEvent[0], partsOfEvent[1], partsOfEvent[2]);
@@ -65,9 +64,7 @@ public class Pooh {
                     printEventMessage(newEvent);
                     break;
                 default:
-                    printLine();
-                    System.out.println("Please enter a valid command!");
-                    printLine();
+                    throw new InvalidCommandException("Please enter a valid command");
                 }
             }catch (Exception e) {
                 System.out.println("An unexpected error occurred: " + e.getMessage());
