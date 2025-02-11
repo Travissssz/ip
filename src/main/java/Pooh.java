@@ -46,7 +46,7 @@ public class Pooh {
                     printToDoTaskMessage(newToDo);
                     break;
                 case "deadline":
-                    if (!partsOfInput[1].contains(" /by ")) {
+                    if (partsOfInput.length < 2 || !partsOfInput[1].contains(" /by ")) {
                         throw new MissingTaskDescriptionException("Please enter in the proper format. For example, [deadline TASKNAME /by DATE]");
                     }
                     String[] partsOfDeadline = partsOfInput[1].split(" /by ", 2);
@@ -55,8 +55,8 @@ public class Pooh {
                     printDeadLineMessage(newDeadline);
                     break;
                 case "event":
-                    if (!partsOfInput[1].contains(" /from ") || !partsOfInput[1].contains(" /to ")) {
-                        throw new MissingTaskDescriptionException("Please enter in the proper format. For example, [event TASKNAME /from DATE /to DATE]")
+                    if (partsOfInput.length < 2 || !partsOfInput[1].contains(" /from ") || !partsOfInput[1].contains(" /to ")) {
+                        throw new MissingTaskDescriptionException("Please enter in the proper format. For example, [event TASKNAME /from DATE /to DATE]");
                     }
                     String[] partsOfEvent = partsOfInput[1].split(" /from | /to ", 3);
                     Event newEvent = new Event(partsOfEvent[0], partsOfEvent[1], partsOfEvent[2]);
