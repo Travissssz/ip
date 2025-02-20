@@ -39,7 +39,7 @@ public class Pooh {
                     break;
                 case "todo":
                     if (partsOfInput.length < 2) {
-                        throw new MissingTaskDescriptionException("Please enter a proper task description");
+                        throw new MissingTaskDescriptionException("Please enter a proper list task description");
                     }
                     ToDo newToDo = new ToDo(partsOfInput[1]);
                     markToDoTask(newToDo);
@@ -63,7 +63,7 @@ public class Pooh {
                     markEvent(newEvent);
                     printEventMessage(newEvent);
                     break;
-                default:
+           default:
                     throw new InvalidCommandException("Please enter a valid command");
                 }
             }catch (Exception e) {
@@ -71,6 +71,8 @@ public class Pooh {
             }
         }
     }
+
+
 
     public static void printEventMessage(Task task) {
         System.out.println("Got it. I've added this task:");
