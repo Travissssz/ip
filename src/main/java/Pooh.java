@@ -63,7 +63,15 @@ public class Pooh {
                     markEvent(newEvent);
                     printEventMessage(newEvent);
                     break;
-           default:
+                case "delete":
+                    if(partsOfInput.length < 2) {
+                        throw new MissingTaskDescriptionException("Please enter in the proper format. For example, [delete TASKNUMBER]");
+                    }try{
+                    deleteTask(line);
+                }catch (NumberFormatException e){
+                    System.out.println("Error: Task number needs to be a numeric value!!!");
+                }
+                default:
                     throw new InvalidCommandException("Please enter a valid command");
                 }
             }catch (Exception e) {
