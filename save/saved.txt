@@ -1,4 +1,1 @@
-T | 0 | cheese
-D | 1 | class | tmr
 E | 0 | cheer | 9 | 10
-T | 0 | hell

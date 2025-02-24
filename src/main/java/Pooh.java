@@ -92,6 +92,7 @@ public class Pooh {
         } else {
             String taskToDelete = taskList.get(index).toString();
             taskList.remove(taskList.get(index));
+            Filesave.saveAllTasks(taskList);
             printDeleteMessage(taskToDelete);
         }
     }
