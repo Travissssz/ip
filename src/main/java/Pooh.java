@@ -67,7 +67,15 @@ public class Pooh {
                     Filesave.appendTask(newEvent);
                     printEventMessage(newEvent);
                     break;
-           default:
+                case "delete":
+                    if(partsOfInput.length < 2) {
+                        throw new MissingTaskDescriptionException("Please enter in the proper format. For example, [delete TASKNUMBER]");
+                    }try{
+                    deleteTask(line);
+                }catch (NumberFormatException e){
+                    System.out.println("Error: Task number needs to be a numeric value!!!");
+                }
+                default:
                     throw new InvalidCommandException("Please enter a valid command");
                 }
             }catch (Exception e) {
@@ -76,7 +84,23 @@ public class Pooh {
         }
     }
 
+    public static void deleteTask(String line) {
+        int index = Integer.parseInt(line.split(" ")[1]) - 1; // Extract task index
+        // Validate task index
+        if (index >= taskList.size() || index < 0) {
+            System.out.println("Invalid index.");
+        } else {
+            String taskToDelete = taskList.get(index).toString();
+            taskList.remove(taskList.get(index));
+            printDeleteMessage(taskToDelete);
+        }
+    }
 
+    public static void printDeleteMessage(String Task) {
+        System.out.println("I've removed this task:");
+        System.out.println(Task);
+        System.out.println("Now you have " + taskList.size() + " tasks in the list");
+    }
 
     public static void printEventMessage(Task task) {
         System.out.println("Got it. I've added this task:");
