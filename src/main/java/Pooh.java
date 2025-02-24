@@ -1,3 +1,4 @@
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -42,7 +43,8 @@ public class Pooh {
                         throw new MissingTaskDescriptionException("Please enter a proper list task description");
                     }
                     ToDo newToDo = new ToDo(partsOfInput[1]);
-                    markToDoTask(newToDo);
+                    taskList.add(newToDo);
+                    Filesave.appendTask(newToDo);
                     printToDoTaskMessage(newToDo);
                     break;
                 case "deadline":
@@ -51,7 +53,8 @@ public class Pooh {
                     }
                     String[] partsOfDeadline = partsOfInput[1].split(" /by ", 2);
                     Deadline newDeadline = new Deadline(partsOfDeadline[0], partsOfDeadline[1]);
-                    markDeadline(newDeadline);
+                    taskList.add(newDeadline);
+                    Filesave.appendTask(newDeadline);
                     printDeadLineMessage(newDeadline);
                     break;
                 case "event":
@@ -60,7 +63,8 @@ public class Pooh {
                         }
                     String[] partsOfEvent = partsOfInput[1].split(" /from | /to ", 3);
                     Event newEvent = new Event(partsOfEvent[0], partsOfEvent[1], partsOfEvent[2]);
-                    markEvent(newEvent);
+                    taskList.add(newEvent);
+                    Filesave.appendTask(newEvent);
                     printEventMessage(newEvent);
                     break;
            default:
@@ -125,10 +129,13 @@ public class Pooh {
             } else {
                 if (mark) {
                     taskList.get(index).markAsDone(); // Mark task as done
+                    Filesave.saveAllTasks(taskList);
                     printLine();
                     System.out.printf("Nice! I've marked this task as done:%n%s%n", taskList.get(index));
+
                 } else {
                     taskList.get(index).setIsDone(false); // Unmark task
+                    Filesave.saveAllTasks(taskList);
                     printLine();
                     System.out.printf("OK, I've marked this task as not done yet:%n%s%n", taskList.get(index));
                 }
@@ -169,6 +176,10 @@ public class Pooh {
     //Main method that starts the Pooh assistant.
     public static void main(String[] args) {
         printWelcomeMessage();
+        taskList = Filesave.loadTasks();
+        taskCounter = taskList.size(); // Update task counter
+        System.out.println("Loaded " + taskCounter + " task(s) from file.");
         interactWithUser();
     }
+
 }

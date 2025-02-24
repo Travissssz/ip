@@ -1,8 +1,8 @@
 // Represents a Task with a name and completion status
-public class Task {
+public abstract class Task {
     // Instance variables for task name and completion status
-    private String taskName;
-    private boolean isDone;
+    protected String taskName;
+    protected boolean isDone;
 
     // Constructor to create a Task with a specified name
     public Task(String taskName) {
@@ -39,6 +39,8 @@ public class Task {
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // Returns "X" if done, otherwise a space
     }
+
+    public abstract String toFileFormat();
 
     // Returns the string representation of the task
     @Override
