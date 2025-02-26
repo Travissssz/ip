@@ -1,4 +1,3 @@
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -7,11 +6,6 @@ public class Pooh {
     // List of tasks
     public static ArrayList<Task> taskList = new ArrayList<>();
     public static int taskCounter = 0;
-
-    //Prints a line to separate sections in the output.
-    public static void printLine() {
-        System.out.println("____________________________________________________________");
-    }
 
     //Main loop for interacting with the user.
     public static void interactWithUser() {
@@ -27,10 +21,10 @@ public class Pooh {
                 String command = partsOfInput[0];
                 switch (command) {
                 case "bye":
-                    printByeMessage();
+                    Ui.printByeMessage();
                     return;
                 case "list":
-                    printTaskList();
+                    Ui.printTaskList();
                     break;
                 case "mark":
                     markTask(line, true);
@@ -45,7 +39,7 @@ public class Pooh {
                     ToDo newToDo = new ToDo(partsOfInput[1]);
                     taskList.add(newToDo);
                     Filesave.appendTask(newToDo);
-                    printToDoTaskMessage(newToDo);
+                    Ui.printTaskAddedMessage(newToDo);
                     break;
                 case "deadline":
                     if (partsOfInput.length < 2 || !partsOfInput[1].contains(" /by ")) {
@@ -55,7 +49,7 @@ public class Pooh {
                     Deadline newDeadline = new Deadline(partsOfDeadline[0], partsOfDeadline[1]);
                     taskList.add(newDeadline);
                     Filesave.appendTask(newDeadline);
-                    printDeadLineMessage(newDeadline);
+                    Ui.printTaskAddedMessage(newDeadline);
                     break;
                 case "event":
                         if (partsOfInput.length < 2 || !partsOfInput[1].contains(" /from ") || !partsOfInput[1].contains(" /to ")) {
@@ -65,7 +59,7 @@ public class Pooh {
                     Event newEvent = new Event(partsOfEvent[0], partsOfEvent[1], partsOfEvent[2]);
                     taskList.add(newEvent);
                     Filesave.appendTask(newEvent);
-                    printEventMessage(newEvent);
+                    Ui.printTaskAddedMessage(newEvent);
                     break;
                 case "delete":
                     if(partsOfInput.length < 2) {
@@ -93,54 +87,8 @@ public class Pooh {
             String taskToDelete = taskList.get(index).toString();
             taskList.remove(taskList.get(index));
             Filesave.saveAllTasks(taskList);
-            printDeleteMessage(taskToDelete);
+            Ui.printDeleteMessage(taskToDelete);
         }
-    }
-
-    public static void printDeleteMessage(String Task) {
-        System.out.println("I've removed this task:");
-        System.out.println(Task);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list");
-    }
-
-    public static void printEventMessage(Task task) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list");
-    }
-
-    public static void markEvent(Event event) {
-        taskList.add(event);
-        taskCounter++;
-    }
-
-
-    public static void printDeadLineMessage(Task task) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list");
-    }
-
-    public static void markDeadline(Deadline deadline) {
-        taskList.add(deadline);
-        taskCounter++;
-    }
-
-    public static void printToDoTaskMessage(Task task){
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list");
-    }
-
-    public static void markToDoTask(Task task){
-        taskList.add(task);
-        taskCounter++;
-    }
-
-    public static void printByeMessage(){
-        printLine();
-        System.out.println("Bye. Hope to see you again soon!");
-        printLine();
     }
 
     //Marks the task as done or not done.
@@ -155,14 +103,15 @@ public class Pooh {
                 if (mark) {
                     taskList.get(index).markAsDone(); // Mark task as done
                     Filesave.saveAllTasks(taskList);
-                    printLine();
+                    Ui.printLine();
                     System.out.printf("Nice! I've marked this task as done:%n%s%n", taskList.get(index));
-
+                    Ui.printLine();
                 } else {
                     taskList.get(index).setIsDone(false); // Unmark task
                     Filesave.saveAllTasks(taskList);
-                    printLine();
+                    Ui.printLine();
                     System.out.printf("OK, I've marked this task as not done yet:%n%s%n", taskList.get(index));
+                    Ui.printLine();
                 }
             }
         }catch (NumberFormatException e){
@@ -176,31 +125,9 @@ public class Pooh {
         taskCounter++;
     }
 
-    //Prints all tasks in the list.
-    public static void printTaskList() {
-        printLine();
-        if (taskList.isEmpty()) {
-            System.out.println("No tasks in the list yet.");
-        } else {
-            System.out.println("Here are the tasks in your list:");
-            for (int i = 0; i < taskList.size(); i++) {
-                System.out.println((i + 1) + ". " + taskList.get(i));
-            }
-        }
-        printLine();
-    }
-
-    //Prints welcome message
-    public static void printWelcomeMessage(){
-        printLine();
-        System.out.println("Hello! I'm Pooh, your personal assistant.");
-        System.out.println("What can I do for you today, sir?");
-        printLine();
-    }
-
     //Main method that starts the Pooh assistant.
     public static void main(String[] args) {
-        printWelcomeMessage();
+        Ui.printWelcomeMessage();
         taskList = Filesave.loadTasks();
         taskCounter = taskList.size(); // Update task counter
         System.out.println("Loaded " + taskCounter + " task(s) from file.");
