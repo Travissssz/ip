@@ -38,7 +38,7 @@ public class Pooh {
                     }
                     ToDo newToDo = new ToDo(partsOfInput[1]);
                     taskList.add(newToDo);
-                    Filesave.appendTask(newToDo);
+                    Storage.appendTask(newToDo);
                     Ui.printTaskAddedMessage(newToDo);
                     break;
                 case "deadline":
@@ -48,7 +48,7 @@ public class Pooh {
                     String[] partsOfDeadline = partsOfInput[1].split(" /by ", 2);
                     Deadline newDeadline = new Deadline(partsOfDeadline[0], partsOfDeadline[1]);
                     taskList.add(newDeadline);
-                    Filesave.appendTask(newDeadline);
+                    Storage.appendTask(newDeadline);
                     Ui.printTaskAddedMessage(newDeadline);
                     break;
                 case "event":
@@ -58,7 +58,7 @@ public class Pooh {
                     String[] partsOfEvent = partsOfInput[1].split(" /from | /to ", 3);
                     Event newEvent = new Event(partsOfEvent[0], partsOfEvent[1], partsOfEvent[2]);
                     taskList.add(newEvent);
-                    Filesave.appendTask(newEvent);
+                    Storage.appendTask(newEvent);
                     Ui.printTaskAddedMessage(newEvent);
                     break;
                 case "delete":
@@ -86,7 +86,7 @@ public class Pooh {
         } else {
             String taskToDelete = taskList.get(index).toString();
             taskList.remove(taskList.get(index));
-            Filesave.saveAllTasks(taskList);
+            Storage.saveAllTasks(taskList);
             Ui.printDeleteMessage(taskToDelete);
         }
     }
@@ -102,13 +102,13 @@ public class Pooh {
             } else {
                 if (mark) {
                     taskList.get(index).markAsDone(); // Mark task as done
-                    Filesave.saveAllTasks(taskList);
+                    Storage.saveAllTasks(taskList);
                     Ui.printLine();
                     System.out.printf("Nice! I've marked this task as done:%n%s%n", taskList.get(index));
                     Ui.printLine();
                 } else {
                     taskList.get(index).setIsDone(false); // Unmark task
-                    Filesave.saveAllTasks(taskList);
+                    Storage.saveAllTasks(taskList);
                     Ui.printLine();
                     System.out.printf("OK, I've marked this task as not done yet:%n%s%n", taskList.get(index));
                     Ui.printLine();
@@ -128,7 +128,7 @@ public class Pooh {
     //Main method that starts the Pooh assistant.
     public static void main(String[] args) {
         Ui.printWelcomeMessage();
-        taskList = Filesave.loadTasks();
+        taskList = Storage.loadTasks();
         taskCounter = taskList.size(); // Update task counter
         System.out.println("Loaded " + taskCounter + " task(s) from file.");
         interactWithUser();

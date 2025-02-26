@@ -4,10 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Filesave {
+public class Storage {
     private static final String FILE_PATH = "save/saved.txt";
 
-    // ✅ Load tasks from file into ArrayList
     public static ArrayList<Task> loadTasks() {
         ArrayList<Task> tasks = new ArrayList<>();
         File file = new File(FILE_PATH);
@@ -50,7 +49,6 @@ public class Filesave {
         return tasks;
     }
 
-    // ✅ Append a single task to the file
     public static void appendTask(Task task) {
         try (FileWriter fw = new FileWriter(FILE_PATH, true)) {
             fw.write(task.toFileFormat() + System.lineSeparator());
@@ -59,7 +57,6 @@ public class Filesave {
         }
     }
 
-    // ✅ Overwrite the file with the updated task list
     public static void saveAllTasks(ArrayList<Task> tasks) {
         try (FileWriter fw = new FileWriter(FILE_PATH, false)) { // Overwrite file
             for (Task task : tasks) {
