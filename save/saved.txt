@@ -1,4 +1,1 @@
-D | 0 | cheese | tmr
-D | 0 | cheer | in 20min
-E | 0 | cheer | 6 | 10
-T | 1 | cheer
+T | 0 | cheer
