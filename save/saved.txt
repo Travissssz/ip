@@ -1,1 +1,8 @@
 T | 0 | cheer
+T | 0 | cheese
+D | 0 | cheer | tmr
+T | 0 | huh
+E | 1 | temple | here | there
+D | 0 | task | 2
+E | 0 | adasd | asdasd | adsasda
+T | 0 | cheer

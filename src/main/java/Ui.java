@@ -5,22 +5,6 @@ public class Ui {
         System.out.println("____________________________________________________________");
     }
 
-    public static void printDeleteMessage(String Task) {
-        printLine();
-        System.out.println("I've removed this task:");
-        System.out.println(Task);
-        System.out.println("Now you have " + Pooh.taskList.size() + " tasks in the list");
-        printLine();
-    }
-
-    public static void printTaskAddedMessage(Task task){
-        printLine();
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + Pooh.taskList.size() + " tasks in the list");
-        printLine();
-    }
-
     public static void printByeMessage(){
         printLine();
         System.out.println("Bye. Hope to see you again soon!");

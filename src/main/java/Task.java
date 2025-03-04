@@ -1,54 +1,41 @@
-// Represents a Task with a name and completion status
 public abstract class Task {
-    // Instance variables for task name and completion status
     protected String taskName;
     protected boolean isDone;
 
-    // Constructor to create a Task with a specified name
     public Task(String taskName) {
         this.taskName = taskName;
         this.isDone = false; // By default, task is not done
     }
 
-    public static void deleteTask(String line) {
-        int index = Integer.parseInt(line.split(" ")[1]) - 1; // Extract task index
-        // Validate task index
-        if (index >= Pooh.taskList.size() || index < 0) {
-            System.out.println("Invalid index.");
-        } else {
-            String taskToDelete = Pooh.taskList.get(index).toString();
-            Pooh.taskList.remove(Pooh.taskList.get(index));
-            Storage.saveAllTasks(Pooh.taskList);
-            Ui.printDeleteMessage(taskToDelete);
-        }
+    public static void printDeleteMessage(String Task) {
+        Ui.printLine();
+        System.out.println("I've removed this task:");
+        System.out.println(Task);
+        System.out.println("Now you have " + Pooh.taskList.size() + " tasks in the list");
+        Ui.printLine();
     }
 
-    //Marks the task as done or not done.
-    public static void markTask(String line, boolean mark) {
-        try {
-            int index = Integer.parseInt(line.split(" ")[1]) - 1; // Extract task index
+    public static void printTaskAddedMessage(Task task){
+        Ui.printLine();
+        System.out.println("Got it. I've added this task:");
+        System.out.println(task);
+        System.out.println("Now you have " + Pooh.taskList.size() + " tasks in the list");
+        Ui.printLine();
+    }
 
-            // Validate task index
-            if (index >= Pooh.taskList.size() || index < 0) {
-                System.out.println("Invalid index.");
-            } else {
-                if (mark) {
-                    Pooh.taskList.get(index).markAsDone(); // Mark task as done
-                    Storage.saveAllTasks(Pooh.taskList);
-                    Ui.printLine();
-                    System.out.printf("Nice! I've marked this task as done:%n%s%n", Pooh.taskList.get(index));
-                    Ui.printLine();
-                } else {
-                    Pooh.taskList.get(index).setIsDone(false); // Unmark task
-                    Storage.saveAllTasks(Pooh.taskList);
-                    Ui.printLine();
-                    System.out.printf("OK, I've marked this task as not done yet:%n%s%n", Pooh.taskList.get(index));
-                    Ui.printLine();
-                }
-            }
-        }catch (NumberFormatException e){
-            System.out.println("Error: Task number needs to be a numeric value!!!");
+    // Marks the task as done or not done
+    public void markTask(boolean mark) {
+        if (mark) {
+            this.markAsDone(); // Mark task as done
+        } else {
+            this.setIsDone(false); // Unmark task
         }
+        Storage.saveAllTasks(Pooh.taskList); // Save the updated task list
+    }
+
+    // Marks the task as done
+    public void markAsDone() {
+        this.isDone = true;
     }
 
     // Gets the task's name
@@ -69,11 +56,6 @@ public abstract class Task {
     // Sets the task's completion status
     public void setIsDone(boolean isDone) {
         this.isDone = isDone;
-    }
-
-    // Marks the task as done
-    public void markAsDone() {
-        this.isDone = true;
     }
 
     // Returns the status of the task as a string
