@@ -51,6 +51,8 @@ public class Parser {
             return new EventCommand();
         case "delete":
             return new DeleteCommand();
+        case "find":
+            return new FindCommand();
         default:
             throw new InvalidCommandException("Please enter a valid command");
         }

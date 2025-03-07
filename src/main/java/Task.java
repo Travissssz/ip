@@ -38,19 +38,8 @@ public abstract class Task {
         this.isDone = true;
     }
 
-    // Gets the task's name
-    public String getTaskName() {
+    public String getDescription() {
         return taskName;
-    }
-
-    // Sets the task's name
-    public void setTaskName(String taskName) {
-        this.taskName = taskName;
-    }
-
-    // Gets the task's completion status
-    public boolean isDone() {
-        return isDone;
     }
 
     // Sets the task's completion status
