@@ -3,7 +3,12 @@ public class Deadline extends Task {
 
     public Deadline(String taskName, String deadline) {
         super(taskName);
-        this.deadline = deadline;
+        if(Parser.isDateValid(deadline)) {
+            deadline = Parser.formatDate(deadline);
+            this.deadline = deadline;
+        }else{
+            this.deadline = deadline;
+        }
     }
 
     @Override

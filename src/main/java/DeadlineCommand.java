@@ -10,4 +10,6 @@ public class DeadlineCommand extends Command {
         Storage.appendTask(newDeadline);
         Task.printTaskAddedMessage(newDeadline);
     }
+
+
 }
