@@ -17,7 +17,6 @@ public class FindCommand extends Command {
                 matchingTasks.add(task);
             }
         }
-
         // Print results
         if (matchingTasks.isEmpty()) {
             Ui.printLine();
