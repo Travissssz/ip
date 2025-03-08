@@ -9,9 +9,14 @@ import java.util.Arrays;
 import java.util.List;
 
 
+/**
+ * Handles parsing of user input and command execution.
+ */
 public class Parser {
 
-    // Main loop for interacting with the user.
+    /**
+     * Main loop for interacting with the user.
+     */
     public static void interactWithUser() {
         Scanner in = new Scanner(System.in);
 
@@ -33,6 +38,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the appropriate command based on the user input.
+     *
+     * @param command The command string entered by the user.
+     * @return The corresponding Command object.
+     * @throws InvalidCommandException If the command is invalid.
+     */
     private static Command getCommand(String command) throws InvalidCommandException {
         switch (command) {
         case "bye":
@@ -58,7 +70,14 @@ public class Parser {
         }
     }
 
-    public static String formatDate(String userDate){
+    /**
+     * Formats a date string into a standard format.
+     *
+     * @param userDate The date string entered by the user.
+     * @return The formatted date string.
+     * @throws UnableToParseDate If the date cannot be parsed.
+     */
+    public static String formatDate(String userDate) {
         String outputFormat = "MMM dd yyyy"; // Desired output format
 
         // Try parsing the input string using flexible parsing
@@ -84,12 +103,15 @@ public class Parser {
         DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern(outputFormat, Locale.ENGLISH);
         String reformattedStr = parsedDate.format(outputFormatter);
         return reformattedStr;
-
     }
 
-
+    /**
+     * Checks if a date string is valid.
+     *
+     * @param input The date string to validate.
+     * @return True if the date is valid, false otherwise.
+     */
     public static boolean isDateValid(String input) {
-
         List<String> dateFormats = Arrays.asList(
                 "dd/MM/yyyy", // e.g., 31/12/2023
                 "dd-MM-yyyy", // e.g., 31-12-2023
@@ -111,6 +133,4 @@ public class Parser {
         }
         return false; // If no format matches, it's not a valid date
     }
-
-
 }

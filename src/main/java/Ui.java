@@ -1,17 +1,27 @@
+/**
+ * Handles user interface interactions, such as printing messages.
+ */
 public class Ui {
 
-    //Prints a line to separate sections in the output.
+    /**
+     * Prints a line to separate sections in the output.
+     */
     public static void printLine() {
         System.out.println("____________________________________________________________");
     }
 
-    public static void printByeMessage(){
+    /**
+     * Prints a goodbye message.
+     */
+    public static void printByeMessage() {
         printLine();
         System.out.println("Bye. Hope to see you again soon!");
         printLine();
     }
 
-    //Prints all tasks in the list.
+    /**
+     * Prints all tasks in the list.
+     */
     public static void printTaskList() {
         printLine();
         if (Pooh.taskList.isEmpty()) {
@@ -25,8 +35,10 @@ public class Ui {
         printLine();
     }
 
-    //Prints welcome message
-    public static void printWelcomeMessage(){
+    /**
+     * Prints a welcome message.
+     */
+    public static void printWelcomeMessage() {
         printLine();
         System.out.println("Hello! I'm Pooh, your personal assistant.");
         System.out.println("What can I do for you today, sir?");

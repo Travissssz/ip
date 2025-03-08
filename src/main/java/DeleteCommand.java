@@ -1,4 +1,13 @@
+/**
+ * Represents a command to delete a task.
+ */
 public class DeleteCommand extends Command {
+    /**
+     * Executes the delete command by removing the specified task from the task list.
+     *
+     * @param partsOfInput The input string split into parts.
+     * @throws NumberFormatException If the task index is not a valid number.
+     */
     @Override
     public void execute(String[] partsOfInput) throws Exception {
         try {
