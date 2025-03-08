@@ -1,2 +1,2 @@
-D | 0 | cs2113 lecture | Mar 10 2025
-D | 0 | do ee2211 assignement | Mar 10 2025
+T | 0 | cs2113 tut
+E | 1 | cheer | 6pm | 10pm
