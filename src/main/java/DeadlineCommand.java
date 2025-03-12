@@ -1,4 +1,13 @@
+/**
+ * Represents a command to add a deadline task.
+ */
 public class DeadlineCommand extends Command {
+    /**
+     * Executes the deadline command by parsing the input and adding a new deadline task.
+     *
+     * @param partsOfInput The input string split into parts.
+     * @throws MissingTaskDescriptionException If the input format is invalid.
+     */
     @Override
     public void execute(String[] partsOfInput) throws Exception {
         if (partsOfInput.length < 2 || !partsOfInput[1].contains(" /by ")) {
@@ -10,6 +19,4 @@ public class DeadlineCommand extends Command {
         Storage.appendTask(newDeadline);
         Task.printTaskAddedMessage(newDeadline);
     }
-
-
 }

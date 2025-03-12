@@ -1,6 +1,15 @@
 import java.util.ArrayList;
 
+/**
+ * Represents a command to find tasks containing a keyword.
+ */
 public class FindCommand extends Command {
+    /**
+     * Executes the find command by searching for tasks containing the specified keyword.
+     *
+     * @param partsOfInput The input string split into parts.
+     * @throws MissingTaskDescriptionException If the keyword is missing.
+     */
     @Override
     public void execute(String[] partsOfInput) throws Exception {
         if (partsOfInput.length < 2) {
