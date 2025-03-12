@@ -1,4 +1,13 @@
+/**
+ * Represents a command to add a to-do task.
+ */
 public class TodoCommand extends Command {
+    /**
+     * Executes the todo command by parsing the input and adding a new to-do task.
+     *
+     * @param partsOfInput The input string split into parts.
+     * @throws MissingTaskDescriptionException If the task description is missing.
+     */
     @Override
     public void execute(String[] partsOfInput) throws Exception {
         if (partsOfInput.length < 2) {

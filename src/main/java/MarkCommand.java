@@ -1,10 +1,24 @@
+/**
+ * Represents a command to mark or unmark a task as done.
+ */
 public class MarkCommand extends Command {
     private boolean isMark;
 
+    /**
+     * Constructs a MarkCommand.
+     *
+     * @param isMark True to mark the task as done, false to unmark it.
+     */
     public MarkCommand(boolean isMark) {
         this.isMark = isMark;
     }
 
+    /**
+     * Executes the mark/unmark command by updating the task's status.
+     *
+     * @param partsOfInput The input string split into parts.
+     * @throws NumberFormatException If the task index is not a valid number.
+     */
     @Override
     public void execute(String[] partsOfInput) throws Exception {
         try {
