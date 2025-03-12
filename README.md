@@ -1,26 +1,106 @@
-# Duke project template
+# Pooh User Guide
+![Screenshot2.png](Screenshot2.png)
+![Screenshot.png](Screenshot.png)
+Pooh is a CLI based task manager application, that allows users to add, delete, mark and unmark, list and find tasks.
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+## Features
 
-## Setting up in Intellij
+### Adding Tasks
 
-Prerequisites: JDK 17, update Intellij to the most recent version.
+Users can add tasks to the list using (todo, event and deadline)
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 17** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-1. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+Example: `todo return book`
+```
+____________________________________________________________
+Got it. I've added this task:
+[T][ ] read book
+Now you have 3 tasks in the list
+____________________________________________________________
+```
+Example: `deadline do ee2211 assignement /by 10/03/2025`
+```
+____________________________________________________________
+Got it. I've added this task:
+[D] [ ] do ee2211 assignement (by: Mar 10 2025)
+Now you have 4 tasks in the list
+____________________________________________________________
+``` 
+Example: `event Boys Trip /from 13/05/2025 /to 19/05/2025`
+```
+____________________________________________________________
+Got it. I've added this task:
+[E] [ ] boys trip (from: 13/05/2025 to: 19/05/2025)
+Now you have 5 tasks in the list
+____________________________________________________________
+```
 
-**Warning:** Keep the `src\main\java` folder as the root folder for Java files (i.e., don't rename those folders or move Java files to another folder outside of this folder path), as this is the default location some tools (e.g., Gradle) expect to find Java files.
+## Marking and Unmarking tasks
+
+Tasks can be marked as completed or unmarked if they are not completed.
+
+Example: `mark 2`
+```
+____________________________________________________________
+Nice! I've marked this task as done:
+[D] [X] do ee2211 assignement (by: Mar 10 2025)
+____________________________________________________________
+``` 
+
+Example: `unmark 2`
+```
+____________________________________________________________
+OK, I've marked this task as not done yet:
+[D] [ ] do ee2211 assignement (by: Mar 10 2025)
+____________________________________________________________
+```
+
+### Finding tasks
+
+Tasks can be searched by a keyword.
+
+Example: `find assignement`
+```
+____________________________________________________________
+Here are the matching tasks in your list:
+1.[D] [ ] do ee2211 assignement (by: Mar 10 2025)
+____________________________________________________________
+```
+### List tasks
+
+Users can view all the tasks in the list.
+
+Example: `list`
+```
+____________________________________________________________
+Here are the tasks in your list:
+1. [D] [ ] cs2113 lecture (by: Mar 10 2025)
+2. [D] [ ] do ee2211 assignement (by: Mar 10 2025)
+3. [E] [ ] boys trip (from: 13/05/2025 to: 19/05/2025)
+____________________________________________________________
+```
+
+### Delete tasks
+
+Tasks can be removed from the list.
+
+Example: `delete 3`
+```
+____________________________________________________________
+I've removed this task:
+[E] [ ] boys trip (from: 13/05/2025 to: 19/05/2025)
+Now you have 2 tasks in the list
+____________________________________________________________
+```
+## Command summary
+
+| Command  |                                               Format, Example                                                |
+|----------|:------------------------------------------------------------------------------------------------------------:|
+| Todo     |                                 todo [TASKNAME] <br/>e.g Todo cs2113 Lecture                                 |
+| deadline |                 deadline [TASKNAME] /by [END DATE]<br/>e.g deadline cs2113 ip /by 10/03/2025                 |
+| event    | event [TASKNAME] /from [START TIME] /to [END TIME] <br/> e.g event Boys Trip /from 13/05/2025 /to 19/05/2025 |
+| mark     |                                     mark [TASK NUMBER] <br/> e.g mark 2                                      |
+| unmark   |                                   unmark [TASK NUMBER] <br/> e.g unmark 2                                    |
+| find     |                                     find [KEYWORD] <br/> e.g find cs2113                                     |
+| list     |                                                     list                                                     |
+| delete   |                                   delete [TASK NUMBER] <br/> e.g delete 2                                    |
+
