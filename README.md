@@ -1,6 +1,4 @@
 # Pooh User Guide
-![Screenshot2.png](Screenshot2.png)
-![Screenshot.png](Screenshot.png)
 Pooh is a CLI based task manager application, that allows users to add, delete, mark and unmark, list and find tasks.
 
 ## Features
