@@ -9,7 +9,16 @@ Pooh is a CLI based task manager application, that allows users to add, delete, 
 
 Users can add tasks to the list using (todo, event and deadline)
 
+<<<<<<< HEAD
+____________________________________________________________
+I've removed this task:
+[E] [ ] boys trip (from: 13/05/2025 to: 19/05/2025)
+Now you have 2 tasks in the list
+____________________________________________________________
+
+=======
 Example: `todo return book`
+>>>>>>> branch-Level-9
 ```
 ____________________________________________________________
 Got it. I've added this task:
