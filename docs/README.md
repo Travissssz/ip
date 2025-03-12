@@ -16,6 +16,12 @@ Example: `keyword (optional arguments)`
 
 // A description of the expected outcome goes here
 
+____________________________________________________________
+I've removed this task:
+[E] [ ] boys trip (from: 13/05/2025 to: 19/05/2025)
+Now you have 2 tasks in the list
+____________________________________________________________
+
 ```
 expected output
 ```
